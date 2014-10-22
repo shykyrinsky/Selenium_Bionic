@@ -4,6 +4,7 @@
     <test name="SimpleTest" >
         <classes>
             <class name="simple.FirstTest" />
+            <class name="PlusTest" />
         </classes>
     </test>
 
