@@ -14,7 +14,7 @@ import java.util.Objects;
 /**
  * Created by Bionic on 10/27/14.
  */
-public class SimpleAgain {
+public class SimpleAgainTest {
     public static WebDriver driver;
 
     @DataProvider

@@ -5,8 +5,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
-
 public class ValidationsTest {
 
     //Using @Parameters to pass data in test method
@@ -33,7 +31,7 @@ public class ValidationsTest {
     }
 
     //Using @DataProvider from another class
-    @Test ( dataProvider = "emailsSet", dataProviderClass = StaticEmailsProvider.class)
+    @Test ( dataProvider = "emailsSet", dataProviderClass = StaticDataProvider.class)
     public void testValidEmailwithStProvider( boolean expResult, String emailString ) {
         testValidateEmail(expResult, emailString);
     }
