@@ -1,7 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="functional">
-    <suite-files>
-        <suite-file path="functional.xml" />
-    </suite-files>
+    <test name="testStringPresence">
+        <classes>
+            <class name="simple.StringMethodsTest" />
+        </classes>
+    </test>
 </suite>
