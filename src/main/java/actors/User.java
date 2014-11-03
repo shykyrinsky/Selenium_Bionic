@@ -13,4 +13,8 @@ public class User {
         this.nik = nik;
         this.passw = passw;
     }
+
+    public generateEmail() {
+        //diff emails
+    }
 }

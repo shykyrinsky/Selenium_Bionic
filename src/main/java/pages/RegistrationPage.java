@@ -1,6 +1,8 @@
 package pages;
 
 import actors.User;
+import org.openqa.selenium.By;
+import pages.RegistrationPage;
 
 /**
  * Created by Illya on 03.11.2014.
@@ -24,6 +26,7 @@ public class RegistrationPage {
   */
     // fill all fields with user's data
    public RegistrationPage setFieldsWithUserData( User user) {
+
 
     return this;
    }
