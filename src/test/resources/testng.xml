@@ -3,7 +3,7 @@
 <suite name="functional">
     <test name="testStringPresence">
         <classes>
-            <class name="simple.ValidationsTest" />
+            <class name="functional.RegisterTest" />
         </classes>
     </test>
 </suite>
