@@ -5,16 +5,20 @@ package actors;
  */
 public class User {
     public String email;
-    public String nik;
+    public String nick;
     public String passw;
 
-    public User (String email, String nik, String passw) {
-        this.email = email;
-        this.nik = nik;
-        this.passw = passw;
+    private static String BASE_EMAIL_NAME = "user";
+    private static String BASE_EMAIL_DOMAIN = "@mail.ua";
+    private static String BASE_NICK = "nick";
+    private static String BASE_PASS = "123";
+
+    //constructor that every time returns diff user
+    public User () {
+        String rand = "" + Math.round(Math.random()*10000);
+        this.email = BASE_EMAIL_NAME + rand + BASE_EMAIL_DOMAIN ;
+        this.nick = BASE_NICK + rand;
+        this.passw = BASE_PASS + rand;
     }
 
-    public generateEmail() {
-        //diff emails
-    }
 }
