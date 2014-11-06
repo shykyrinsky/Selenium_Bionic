@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 public class RegisterTest {
 
     protected WebDriver driver;
-    private static String BASE_URL = "http://hotline.ua";
+    private static final String BASE_URL = "http://hotline.ua";
     private User sameUser;
 
     @BeforeSuite

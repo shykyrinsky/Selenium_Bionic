@@ -15,10 +15,6 @@ public class WelcomePage {
     }
 
     public boolean isOnPage() {
-        if (driver.getCurrentUrl().contains("final")) {
-            return true;
-        } else {
-            return false;
-        }
+        return driver.getCurrentUrl().contains("final");
     }
 }

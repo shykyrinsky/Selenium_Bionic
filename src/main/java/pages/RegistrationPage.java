@@ -1,15 +1,11 @@
 package pages;
 
 import actors.User;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import pages.RegistrationPage;
 
-import java.util.HashMap;
-import java.util.Hashtable;
 
 /**
  * Created by Illya on 03.11.2014.
@@ -71,11 +67,7 @@ public class RegistrationPage {
 
     //return True if any field is highlighted in red colour
     public boolean isError() {
-        if (emailError.isDisplayed()) {
-            return true;
-        } else {
-            return false;
-        }
+        return emailError.isDisplayed();
     }
 
 }

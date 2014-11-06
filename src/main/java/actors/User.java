@@ -8,10 +8,10 @@ public class User {
     public String nick;
     public String passw;
 
-    private static String BASE_EMAIL_NAME = "user";
-    private static String BASE_EMAIL_DOMAIN = "@mail.ua";
-    private static String BASE_NICK = "nick";
-    private static String BASE_PASS = "123";
+    private static final String BASE_EMAIL_NAME = "user";
+    private static final String BASE_EMAIL_DOMAIN = "@mail.ua";
+    private static final String BASE_NICK = "nick";
+    private static final String BASE_PASS = "123";
 
     //constructor that every time returns diff user
     public User () {
