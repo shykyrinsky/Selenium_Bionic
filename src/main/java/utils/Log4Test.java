@@ -1,5 +1,9 @@
 package utils;
 
+/**
+ * Created by Bionic on 11/5/14.
+ */
+
 import org.apache.log4j.Logger;
 import org.testng.Reporter;
 
@@ -33,4 +37,3 @@ public class Log4Test {
         return String.format(INFO_LOG, message);
     }
 }
-

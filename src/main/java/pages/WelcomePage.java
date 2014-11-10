@@ -9,6 +9,7 @@ import utils.Log4Test;
  */
 public class WelcomePage {
 
+<<<<<<< Updated upstream
     protected WebDriver driver;
 
     public WelcomePage(WebDriver driver) {
@@ -23,4 +24,7 @@ public class WelcomePage {
             return false;
         }
     }
+=======
+
+>>>>>>> Stashed changes
 }

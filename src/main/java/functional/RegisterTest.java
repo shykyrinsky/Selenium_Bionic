@@ -9,13 +9,27 @@ import pages.WelcomePage;
 
 
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by Illya on 03.11.2014.
  */
 public class RegisterTest extends FunctionalTest {
 
+<<<<<<< Updated upstream
 
     private User sameUser;
+=======
+    protected WebDriver driver;
+
+
+    @BeforeSuite
+    public void setUP () {
+        driver = new FirefoxDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+    }
+>>>>>>> Stashed changes
 
     //positive register test with all valid fields
     @Test
@@ -32,6 +46,7 @@ public class RegisterTest extends FunctionalTest {
         Assert.assertTrue(wlcPage.isOnPage(), "Registration Failed");
     }
 
+<<<<<<< Updated upstream
     //negative register test with the same email
     @Test (dependsOnMethods = "allValidFieldsRegisterTest")
     public void sameEmailRegisterTest() {
@@ -41,6 +56,12 @@ public class RegisterTest extends FunctionalTest {
         RegistrationPage regPage = mainPage.openRegister();
         regPage.setFieldsWithUserData(sameUser).submitFailed();         //use already registered user
         Assert.assertTrue(regPage.isError(), "NO error message is shown");
+=======
+    //negative test with empty string as email
+    @Test
+    public void notValidEmailRegisterTest() {
+
+>>>>>>> Stashed changes
 
     }
 
