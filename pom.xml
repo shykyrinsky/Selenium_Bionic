@@ -8,6 +8,22 @@
     <artifactId>selenium</artifactId>
     <version>1.0</version>
 
+    <profiles>
+        <profile>
+            <id>firefox_local</id>
+            <properties>
+                <browser.name>firefox</browser.name>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>html_unit</id>
+            <properties>
+                <browser.name>htmlunit</browser.name>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>
@@ -34,6 +50,13 @@
 
 
     <build>
+        <resources>
+            <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

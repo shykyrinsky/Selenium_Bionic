@@ -1,30 +1,29 @@
 package pages;
 
-<<<<<<< Updated upstream
+
 import org.openqa.selenium.By;
-=======
->>>>>>> Stashed changes
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-<<<<<<< Updated upstream
+
 import org.testng.Assert;
+import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
 import java.util.List;
-=======
->>>>>>> Stashed changes
+
 
 /**
  * Created by Illya on 03.11.2014.
  */
 public class MainPage {
 
-<<<<<<< Updated upstream
+
     private static final String URL_MATCH = "http://hotline.ua";
 
-    protected WebDriver driver;
+    protected WebDriverWrapper driver;
 
     @FindBy(className = "close")
     private WebElement popupClose;
@@ -47,7 +46,7 @@ public class MainPage {
     private final By compareBtn = By.xpath(".//a[contains(text(),'Сравнить цены')]");
 
 
-    public MainPage(WebDriver driver) {
+    public MainPage(WebDriverWrapper driver) {
         if (!driver.getCurrentUrl().contains(URL_MATCH)) {
             Assert.fail("This is not the page you are expected");
         }
@@ -98,49 +97,6 @@ public class MainPage {
     }
 
 
-=======
-    protected WebDriver driver;
 
-    @FindBy(id = "searchbox")
-    private WebElement searchBox;
-
-    @FindBy(id = "doSearch")
-    private WebElement searchBtn;
-
-    @FindBy(className = "close")
-    private WebElement popupClose;
-
-    @FindBy(xpath = "//div[contains(@class,'region-doubtfulness-popup')]/span[@class='close']")
-    private WebElement popCityClose;
-
-    @FindBy(xpath = "//a[contains(text(), 'Apple iPhone 5S 16GB (Space Gray)')]")
-    private WebElement hrefResult;
-
-    public MainPage (WebDriver driver) {
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-    }
-
-    public MainPage initPage() {
-        popupClose.click();
-        popCityClose.click();
-        return this;
-    }
-
-
-    public MainPage findProduct(String product) {
-        searchBox.sendKeys(product);
-        searchBtn.click();
-        return this;
-    }
-
-    public boolean textIsOnPage() {
-        if (hrefResult.isDisplayed()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
->>>>>>> Stashed changes
 
 }

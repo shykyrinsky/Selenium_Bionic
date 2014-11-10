@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
 
@@ -13,7 +14,7 @@ import utils.Log4Test;
  */
 public class RegistrationPage {
 
-  protected WebDriver driver;
+  protected WebDriverWrapper driver;
 
     @FindBy(name = "email")
     private WebElement emailField;
@@ -36,7 +37,7 @@ public class RegistrationPage {
     @FindBy(xpath = ".//form[@id='reg-form']//span[@class='errors']")
     private WebElement emailError;
 
-    public RegistrationPage(WebDriver driver) {
+    public RegistrationPage(WebDriverWrapper driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
         if(regPopupClose.isDisplayed()) {        //close popup "City"
