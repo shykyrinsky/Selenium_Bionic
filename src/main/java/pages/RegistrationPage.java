@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utils.Log4Test;
 
 
 /**
@@ -41,10 +42,12 @@ public class RegistrationPage {
         if(regPopupClose.isDisplayed()) {        //close popup "City"
             regPopupClose.click();
         }
+        Log4Test.info("Open Registration form");
     }
 
     // fill all fields with user's data
     public RegistrationPage setFieldsWithUserData(User user) {
+        Log4Test.info("Registering user with " + user.email);
         emailField.sendKeys(user.email);
         nickField.clear();
         nickField.sendKeys(user.nick);
@@ -67,7 +70,12 @@ public class RegistrationPage {
 
     //return True if any field is highlighted in red colour
     public boolean isError() {
-        return emailError.isDisplayed();
+        if (emailError.isDisplayed()) {
+            Log4Test.info("Registration failed");
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

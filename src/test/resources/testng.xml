@@ -1,9 +1,11 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="functional">
-    <test name="testRegister_HotlineUA">
+    <test name="test_HotlineUA">
         <classes>
             <class name="functional.RegisterTest" />
+            <class name="functional.FindProductTest" />
+            <class name="functional.CompareTest" />
         </classes>
     </test>
 </suite>

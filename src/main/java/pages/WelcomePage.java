@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import utils.Log4Test;
 
 /**
  * Created by Bionic on 11/3/14.
@@ -15,6 +16,11 @@ public class WelcomePage {
     }
 
     public boolean isOnPage() {
-        return driver.getCurrentUrl().contains("final");
+        if (driver.getCurrentUrl().contains("final")) {
+            Log4Test.info("Registration complete successfull");
+            return true;
+        } else {
+            return false;
+        }
     }
 }
