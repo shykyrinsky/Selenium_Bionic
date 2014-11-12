@@ -9,11 +9,12 @@ import pages.WelcomePage;
 
 
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Created by Illya on 03.11.2014.
  */
 public class RegisterTest extends FunctionalTest {
-
 
     private User sameUser;
 
@@ -31,6 +32,7 @@ public class RegisterTest extends FunctionalTest {
         WelcomePage wlcPage = regPage.submitSuccess();
         Assert.assertTrue(wlcPage.isOnPage(), "Registration Failed");
     }
+
 
     //negative register test with the same email
     @Test (dependsOnMethods = "allValidFieldsRegisterTest")

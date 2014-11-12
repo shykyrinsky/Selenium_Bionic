@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
 <suite name="FunctionalSuite" verbose="1" >
-<<<<<<< HEAD
+
     <test name="SimpleTest" >
         <classes>
 
@@ -9,7 +9,7 @@
         </classes>
     </test>
 
-=======
+
     <test name="EmailValidPositiveTest" >
         <parameter name="expResult" value="true" />
         <parameter name="emailString" value="ukr@ukr.net" />
@@ -55,5 +55,5 @@
             </class>
         </classes>
     </test>
->>>>>>> 32f4f6011238a01cc074b7141ac4d7d6fec1eb05
+
 </suite>

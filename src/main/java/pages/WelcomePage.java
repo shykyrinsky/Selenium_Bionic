@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
 /**
@@ -9,9 +10,10 @@ import utils.Log4Test;
  */
 public class WelcomePage {
 
-    protected WebDriver driver;
 
-    public WelcomePage(WebDriver driver) {
+    protected WebDriverWrapper driver;
+
+    public WelcomePage(WebDriverWrapper driver) {
         this.driver = driver;
     }
 
@@ -23,4 +25,5 @@ public class WelcomePage {
             return false;
         }
     }
+
 }

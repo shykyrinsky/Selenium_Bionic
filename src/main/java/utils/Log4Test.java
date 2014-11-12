@@ -32,5 +32,7 @@ public class Log4Test {
         Reporter.log(String.format(INFO_LOG, message));
         return String.format(INFO_LOG, message);
     }
+
+
 }
 

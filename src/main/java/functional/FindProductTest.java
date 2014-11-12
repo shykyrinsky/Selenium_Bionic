@@ -1,9 +1,12 @@
 package functional;
 
 
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
+
+import static java.lang.Thread.sleep;
 
 
 /**
@@ -20,7 +23,7 @@ public class FindProductTest extends FunctionalTest {
         mainPage.initPage();
         mainPage.searchProduct(product);
         Assert.assertTrue(mainPage.verifySearchResultsPresent(),
-                                    "Product " + product + " +  is NOT found"); //log4test.error() always run :(
+                                    "Product " + product + " +  is NOT found");
 
     }
 
@@ -31,8 +34,8 @@ public class FindProductTest extends FunctionalTest {
         MainPage mainPage = new MainPage(driver);
         mainPage.initPage();
         mainPage.searchProduct(product);
-        Assert.assertFalse(mainPage.verifySearchResultsPresent(),
-                                    "Product " + product + " IS found");  // log4test.error() always run :(
+        Assert.assertTrue(mainPage.verifyNoSearchResults(),
+                                    "Product " + product + " IS found");
     }
 
 }
