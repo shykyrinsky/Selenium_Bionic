@@ -16,13 +16,12 @@ import java.util.Set;
  */
 public class WebDriverWrapper implements WebDriver {
 
-    private  static  WebDriver driver;
+    public  static  WebDriver driver;
     private  static final int TIME_TO_WAIT = Integer.valueOf(PropertyLoader.loadProperty("selenium.max.timeout"));
 
     public WebDriverWrapper(WebDriver driver) {
         this.driver = driver;
     }
-
 
 
     @Override
@@ -43,7 +42,7 @@ public class WebDriverWrapper implements WebDriver {
     @Override
     public List<WebElement> findElements(By by) {
         WebDriverWait wait = new WebDriverWait(driver, TIME_TO_WAIT);
-        wait.until(ExpectedConditions.presenceOfElementLocated(by));
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(by));
         return driver.findElements(by);
     }
 

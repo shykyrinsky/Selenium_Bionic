@@ -3,8 +3,10 @@ package pages;
 
 import org.openqa.selenium.By;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -43,7 +45,16 @@ public class MainPage {
     @FindBy(xpath = "//*[@id='test']//div[@class = 'tx-price list result']")     //another type of search results
     private List<WebElement> searchResultsOther;
 
+    @FindBy(xpath = "//*[@id='test']//div[@class='search-result-page no']")
+    private WebElement noResults;
+
     private final By compareBtn = By.xpath(".//a[contains(text(),'Сравнить цены')]");
+
+    @FindBy(xpath = "//a[@href='/bt/']")
+    private WebElement menuItemBT;
+
+    @FindBy(xpath = "//a[@href='/bt/holodilniki/']")
+    private WebElement subMenuItemRefs;
 
 
     public MainPage(WebDriverWrapper driver) {
@@ -73,6 +84,7 @@ public class MainPage {
 
         //enter @product in searchBox and submit
     public MainPage searchProduct(String product) {
+        searchBox.clear();
         searchBox.sendKeys(product);
         searchBox.submit();
         Log4Test.info("Searching for '" + product + "'");
@@ -88,6 +100,15 @@ public class MainPage {
             return false;
         }
     }
+        //return true if "No results of search" message is displayed
+    public boolean verifyNoSearchResults() {
+        if (noResults.isDisplayed()) {
+            Log4Test.info("This product is NOT found in search results");
+            return true;
+        } else {
+            return false;
+        }
+    }
 
         //click on "Compare Price" Button
     public ComparsionPage comparePrices() {
@@ -96,6 +117,21 @@ public class MainPage {
         return new ComparsionPage(driver);
     }
 
+    public RefrigiratorsPage selectSubMenuREFs() {
+        Actions actions = new Actions(driver.driver);
+        actions.moveToElement(menuItemBT).build().perform();
+        //actions.moveToElement(subMenuItemRefs).click().build().perform();
+        subMenuItemRefs.click();
+        return new RefrigiratorsPage(driver);
+    }
+
+    public void mouseOver(WebElement element) {
+        String code = "var fireOnThis = arguments[0];"
+                + "var evObj = document.createEvent('MouseEvents');"
+                + "evObj.initEvent( 'mouseover', true, true );"
+                + "fireOnThis.dispatchEvent(evObj);";
+        ((JavascriptExecutor)driver).executeScript(code, element);
+    }
 
 
 

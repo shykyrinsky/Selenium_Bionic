@@ -1,5 +1,6 @@
 package selenium;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.Assert;
@@ -24,7 +25,7 @@ public class WebDriverFactory {
         }
 
         driverWrapper.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driverWrapper.manage().window().maximize();
+
         driverWrapper.manage().deleteAllCookies();
         driverWrapper.manage().window().maximize();
         return driverWrapper;

@@ -3,13 +3,16 @@ package functional;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import selenium.WebDriverFactory;
 import selenium.WebDriverWrapper;
+import utils.Log4Test;
 import utils.PropertyLoader;
 
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
 
 
@@ -22,12 +25,19 @@ public class FunctionalTest {
 
     public static WebDriverWrapper driver;
 
-    public static final String BASE_URL = "http://hotline.ua";
+    public static final String BASE_URL = PropertyLoader.loadProperty("site.url");
 
     @BeforeSuite
     public void setUp() {
-        driver = WebDriverFactory.initDriver(PropertyLoader.loadProperty("browser.name"));
+        String browser = PropertyLoader.loadProperty("browser.name");
+        driver = WebDriverFactory.initDriver(browser);
+        Log4Test.info("**********Starting_TestSuit**********");
+        Log4Test.info("Start browser " + browser);
+    }
 
+    @BeforeMethod
+    public void logMethodName(Method m) {
+        Log4Test.info("-------" + m.getName() + "-------");
     }
 
     @AfterSuite
@@ -38,7 +48,9 @@ public class FunctionalTest {
             e.printStackTrace();
         }
         if (driver != null) {
+            Log4Test.info("Close browser");
             driver.quit();
+            Log4Test.info("**********End_TestSuit**********");
         }
     }
 
