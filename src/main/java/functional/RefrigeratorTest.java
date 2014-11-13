@@ -4,6 +4,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.RefrigiratorsPage;
@@ -17,13 +18,15 @@ public class RefrigeratorTest extends FunctionalTest {
 
 
     @Test
-    public void AreRefrigiratorsLGSortTest() throws InterruptedException {
+    public void AreRefrigiratorsLGSortTest() {
         driver.get(BASE_URL);
         MainPage mainPage = new MainPage(driver);
         mainPage.initPage();
         RefrigiratorsPage refsPage = mainPage.selectSubMenuREFs();
-        refsPage.filterLG();
-        Thread.sleep(2000);
+        refsPage.filterLGclick();
+        refsPage.sortByPrice();
+        Assert.assertTrue(refsPage.areREFsSortedByPrice(),
+                                     "Ref-s are NOT SORTED by price desc");
     }
 
 

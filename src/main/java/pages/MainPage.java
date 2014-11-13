@@ -96,7 +96,7 @@ public class MainPage {
             Log4Test.info("This product IS found in search results");
             return true;
         } else {
-            Log4Test.info("This product is NOT found in search results");
+            Log4Test.error("This product is NOT found in search results");
             return false;
         }
     }
@@ -106,6 +106,7 @@ public class MainPage {
             Log4Test.info("This product is NOT found in search results");
             return true;
         } else {
+            Log4Test.error("There is no message about NO SUCH PRODUCT");
             return false;
         }
     }
@@ -116,23 +117,12 @@ public class MainPage {
         Log4Test.info("click on 'Compare Price' button");
         return new ComparsionPage(driver);
     }
-
+        //select submenu "Refrigirators" from menu "Household Technicks"
     public RefrigiratorsPage selectSubMenuREFs() {
-        Actions actions = new Actions(driver.driver);
+        Actions actions = new Actions(driver.getOriginalDriver());
         actions.moveToElement(menuItemBT).build().perform();
-        //actions.moveToElement(subMenuItemRefs).click().build().perform();
         subMenuItemRefs.click();
         return new RefrigiratorsPage(driver);
     }
-
-    public void mouseOver(WebElement element) {
-        String code = "var fireOnThis = arguments[0];"
-                + "var evObj = document.createEvent('MouseEvents');"
-                + "evObj.initEvent( 'mouseover', true, true );"
-                + "fireOnThis.dispatchEvent(evObj);";
-        ((JavascriptExecutor)driver).executeScript(code, element);
-    }
-
-
 
 }

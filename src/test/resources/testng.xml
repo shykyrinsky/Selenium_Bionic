@@ -6,6 +6,7 @@
             <class name="functional.RegisterTest" />
             <class name="functional.FindProductTest" />
             <class name="functional.CompareTest" />
+            <class name="functional.RefrigeratorTest" />
         </classes>
     </test>
 </suite>
