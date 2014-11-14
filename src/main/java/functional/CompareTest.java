@@ -14,7 +14,6 @@ public class CompareTest extends FunctionalTest {
 
     @Test( dataProvider = "compareProdData", dataProviderClass = StaticDataProviders.class)
     public void comparePricesTest(String product) {
-        driver.get(BASE_URL);
         MainPage mainPage = new MainPage(driver);
         mainPage.initPage();
         mainPage.searchProduct(product);

@@ -16,7 +16,7 @@ public class RefrigiratorsPage {
 
     protected WebDriverWrapper driver;
 
-    @FindBy(xpath = "//*[@id='filters']//a[contains(text(), 'LG')]")
+    @FindBy(xpath = "//*[@id='filters']//a[text()='LG']")
     private WebElement filterLG;
 
     @FindBy(xpath = "//*[@id='catalogue']//span[@class = 'ddopener']")
@@ -37,12 +37,14 @@ public class RefrigiratorsPage {
         Log4Test.info("Open RefrigiratorPage");
     }
 
+    //click on 'LG' in list of manufactors
     public RefrigiratorsPage filterLGclick() {
         filterLG.click();
-        Log4Test.info("Filter Ref-s with LG");
+        Log4Test.info("Filter Ref-s with 'LG'");
         return this;
     }
 
+    //click on 'Sort by' link and then choose 'By Price' from dropdown list
     public RefrigiratorsPage sortByPrice() {
         sortList.get(0).click();
         sortByPriceLink.click();
@@ -50,12 +52,14 @@ public class RefrigiratorsPage {
         return this;
     }
 
+    //return price of refrigirator with number 'i' in list
     public float getPriceOfRef(int i) {
         String allPrice = refsList.get(i).findElement(priceRef).getText();
         allPrice = allPrice.replaceAll(" ", "");
         return Float.valueOf(allPrice.substring(0, allPrice.indexOf('\u0433')));
     }
 
+    //return true if list of REFs is sorted by price desc (first's price < second's price)
     public boolean areREFsSortedByPrice() {
         if (this.getPriceOfRef(0) < this.getPriceOfRef(1)) {
             Log4Test.info("Ref-s are SORTED by price desc (" + getPriceOfRef(0) +" < "+

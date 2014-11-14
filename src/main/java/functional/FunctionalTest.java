@@ -1,26 +1,19 @@
 package functional;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
-import pages.MainPage;
 import selenium.WebDriverFactory;
 import selenium.WebDriverWrapper;
 import utils.Log4Test;
 import utils.PropertyLoader;
-
-
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
 
 
 
 /**
  * Created by Bionic on 11/5/14.
->>>>>>> Stashed changes
  */
 public class FunctionalTest {
 
@@ -39,6 +32,7 @@ public class FunctionalTest {
     @BeforeMethod
     public void logMethodName(Method m) {
         Log4Test.info("-------" + m.getName() + "-------");
+        driver.get(BASE_URL);
     }
 
     @AfterSuite (alwaysRun = true)

@@ -17,8 +17,7 @@ public class FindProductTest extends FunctionalTest {
 
     // Positive test that verifies @product is found in price lists
     @Test(dataProvider = "products", dataProviderClass = StaticDataProviders.class)
-    public void IsSearchResultPresentTest(String product) {
-        driver.get(BASE_URL);
+    public void isSearchResultPresentTest(String product) {
         MainPage mainPage = new MainPage(driver);
         mainPage.initPage();
         mainPage.searchProduct(product);
@@ -29,8 +28,7 @@ public class FindProductTest extends FunctionalTest {
 
     // Negative test that verifies @product isNot found in price lists
     @Test(dataProvider = "products", dataProviderClass = StaticDataProviders.class)
-    public void IsNotSearchResultPresentTest(String product) {
-        driver.get(BASE_URL);
+    public void isNotSearchResultPresentTest(String product) {
         MainPage mainPage = new MainPage(driver);
         mainPage.initPage();
         mainPage.searchProduct(product);

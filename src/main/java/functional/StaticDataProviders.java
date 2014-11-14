@@ -1,7 +1,6 @@
 package functional;
 
 import org.testng.annotations.DataProvider;
-
 import java.lang.reflect.Method;
 
 
@@ -12,7 +11,7 @@ public class StaticDataProviders {
 
     @DataProvider(name = "products")
     public static Object[][] createData(Method m) {
-        if (m.getName() == "IsSearchResultPresentTest") {
+        if (m.getName() == "isSearchResultPresentTest") {
             return new Object[][]{
                     {"Nexus"},                      //data for positive search test
             };

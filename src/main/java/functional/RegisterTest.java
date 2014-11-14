@@ -7,10 +7,6 @@ import pages.MainPage;
 import pages.RegistrationPage;
 import pages.WelcomePage;
 
-
-
-import java.util.concurrent.TimeUnit;
-
 /**
  * Created by Illya on 03.11.2014.
  */
@@ -21,7 +17,6 @@ public class RegisterTest extends FunctionalTest {
     //positive register test with all valid fields
     @Test
     public void allValidFieldsRegisterTest() {
-        driver.get(BASE_URL);
         MainPage mainPage = new MainPage(driver);
         mainPage.initPage();                                //close popups
         RegistrationPage regPage = mainPage.openRegister();
@@ -37,13 +32,11 @@ public class RegisterTest extends FunctionalTest {
     //negative register test with the same email
     @Test (dependsOnMethods = "allValidFieldsRegisterTest")
     public void sameEmailRegisterTest() {
-        driver.get(BASE_URL);
         MainPage mainPage = new MainPage(driver);
         mainPage.initPage();
         RegistrationPage regPage = mainPage.openRegister();
         regPage.setFieldsWithUserData(sameUser).submitFailed();         //use already registered user
         Assert.assertTrue(regPage.isError(), "NO error message is shown");
-
     }
 
 }
