@@ -17,7 +17,7 @@
         </profile>
 
         <profile>
-            <id>htmlunit</id>
+            <id>html_unit</id>
             <properties>
                 <browser.name>htmlunit</browser.name>
             </properties>
