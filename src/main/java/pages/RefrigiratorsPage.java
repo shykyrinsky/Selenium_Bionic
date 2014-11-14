@@ -53,7 +53,7 @@ public class RefrigiratorsPage {
     public float getPriceOfRef(int i) {
         String allPrice = refsList.get(i).findElement(priceRef).getText();
         allPrice = allPrice.replaceAll(" ", "");
-        return Float.valueOf(allPrice.substring(0,allPrice.indexOf('г')));
+        return Float.valueOf(allPrice.substring(0, allPrice.indexOf('\u0433')));
     }
 
     public boolean areREFsSortedByPrice() {
@@ -62,6 +62,8 @@ public class RefrigiratorsPage {
                                                              + getPriceOfRef(1) + ")");
             return true;
         } else {
+            Log4Test.info("Ref-s are NOT SORTED -> 1: "  + getPriceOfRef(0) + " | 2: "+
+                                                         + getPriceOfRef(1) + ")");
             return false;
         }
     }

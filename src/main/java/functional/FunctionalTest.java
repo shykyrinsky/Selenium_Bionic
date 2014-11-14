@@ -5,6 +5,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import pages.MainPage;
 import selenium.WebDriverFactory;
 import selenium.WebDriverWrapper;
 import utils.Log4Test;
@@ -40,7 +41,7 @@ public class FunctionalTest {
         Log4Test.info("-------" + m.getName() + "-------");
     }
 
-    @AfterSuite
+    @AfterSuite (alwaysRun = true)
     public void tearDown () {
         try {
             Runtime.getRuntime().exec("taskkill /F /IM plugin-container.exe");  //cause Firefox crashes on .quit();
@@ -50,8 +51,8 @@ public class FunctionalTest {
         if (driver != null) {
             Log4Test.info("Close browser");
             driver.quit();
-            Log4Test.info("**********End_TestSuit**********");
         }
+        Log4Test.info("**********End_TestSuit**********");
     }
 
 

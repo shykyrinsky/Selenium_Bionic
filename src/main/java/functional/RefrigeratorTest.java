@@ -26,7 +26,7 @@ public class RefrigeratorTest extends FunctionalTest {
         refsPage.filterLGclick();
         refsPage.sortByPrice();
         Assert.assertTrue(refsPage.areREFsSortedByPrice(),
-                                     "Ref-s are NOT SORTED by price desc");
+                                     "Ref-s are NOT SORTED by price desc!");
     }
 
 

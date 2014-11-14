@@ -30,7 +30,7 @@ public class MainPage {
     @FindBy(className = "close")
     private WebElement popupClose;
 
-    @FindBy(xpath = ".//div[contains(@class,'region-doubtfulness-popup')]/span[@class='close']")
+    @FindBy(xpath = "//div[contains(@class,'region-doubtfulness-popup')]/span[@class='close']")
     private WebElement regPopupClose;
 
     @FindBy(className = "reg")
@@ -48,7 +48,7 @@ public class MainPage {
     @FindBy(xpath = "//*[@id='test']//div[@class='search-result-page no']")
     private WebElement noResults;
 
-    private final By compareBtn = By.xpath(".//a[contains(text(),'Сравнить цены')]");
+    private final By compareBtn = By.xpath(".//a[@class='but-box']");
 
     @FindBy(xpath = "//a[@href='/bt/']")
     private WebElement menuItemBT;

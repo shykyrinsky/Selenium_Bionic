@@ -20,6 +20,6 @@ public class CompareTest extends FunctionalTest {
         mainPage.searchProduct(product);
         ComparsionPage comparePage = mainPage.comparePrices();
         Assert.assertTrue(comparePage.verifyStoresPresent(),
-                                 "There are NOT several offers for this product"); //log4test.error() always run :(
-    }
+                                 "There are NOT several offers for this product");
+}
 }

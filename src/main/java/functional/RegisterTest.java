@@ -30,7 +30,7 @@ public class RegisterTest extends FunctionalTest {
         sameUser = usr;                                  //save particular user in global variable
         regPage.setFieldsWithUserData(usr);
         WelcomePage wlcPage = regPage.submitSuccess();
-        Assert.assertTrue(wlcPage.isOnPage(), "Registration Failed");
+        Assert.assertTrue(wlcPage.isOnPage(), "Registration Failed!");
     }
 
 
