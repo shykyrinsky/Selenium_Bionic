@@ -28,4 +28,11 @@ public class StaticDataProviders {
                 {"braun shave"},                      //data for compare prices test
         };
     }
+
+    @DataProvider(name = "REFsManufactors")
+    public static Object[][] createREFs() {
+        return new Object[][] {
+                {"West"},                      //data Refrigerators test
+        };
+    }
 }

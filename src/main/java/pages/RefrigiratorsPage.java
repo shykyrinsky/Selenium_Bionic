@@ -1,12 +1,19 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.internal.Locatable;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -16,8 +23,25 @@ public class RefrigiratorsPage {
 
     protected WebDriverWrapper driver;
 
-    @FindBy(xpath = "//*[@id='filters']//a[text()='LG']")
-    private WebElement filterLG;
+    private static String filterXpath = "//*[@id='filters']//a[contains(text(), 'manufactor')]";
+
+    @FindBy(xpath = "//*[@id='filters']//div[@class='jspPane']/p/a")
+    private List<WebElement> listAllManufactors;
+
+    @FindBy(xpath = ".//*[@id='filters']//div[@class='jspTrack']")
+    private WebElement verticalBar;
+
+    @FindBy(xpath = ".//*[@id='filters']//div[@class='jspDrag']")
+    private WebElement verticalBarSlider;
+
+    @FindBy(xpath = "//*[@id='filters']//a[contains(@class,'switcher')]")
+    private WebElement expandAllLink;
+
+    @FindBy(xpath = "//span[@class='title-span']/a[@class='hide']")
+    private WebElement hideToolbarLink;
+
+    @FindBy(xpath = "//*[@id='filters']/div[6]/div/div")
+    private WebElement scrollArea;
 
     @FindBy(xpath = "//*[@id='catalogue']//span[@class = 'ddopener']")
     private List<WebElement> sortList;
@@ -30,6 +54,9 @@ public class RefrigiratorsPage {
 
     private static final By priceRef = By.className("orng");
 
+    private WebElement getFilterRefElement(String dynamicXpath, String var) {
+        return driver.findElement(By.xpath(dynamicXpath.replace("manufactor", var)));
+    }
 
     public RefrigiratorsPage(WebDriverWrapper driver) {
         PageFactory.initElements(driver, this);
@@ -37,10 +64,40 @@ public class RefrigiratorsPage {
         Log4Test.info("Open RefrigiratorPage");
     }
 
-    //click on 'LG' in list of manufactors
-    public RefrigiratorsPage filterLGclick() {
-        filterLG.click();
-        Log4Test.info("Filter Ref-s with 'LG'");
+    //click on '@manufactor' in list of manufactors
+    public RefrigiratorsPage filterRefClick(String manufacter) {
+        hideToolbarLink.click();
+
+
+        ((JavascriptExecutor) driver.getOriginalDriver()).
+                executeScript("window.scrollTo(0,(Math.max(document.documentElement.scrollHeight," +
+                        " document.body.scrollHeight,document.documentElement.clientHeight)/7));");
+        expandAllLink.click();
+        //driver.switchTo().frame(scrollArea);
+        int width = verticalBar.getSize().width;
+        WebElement filterElement = getFilterRefElement(filterXpath, manufacter);
+        Actions sliderActions = new Actions(driver.getOriginalDriver());
+        sliderActions.clickAndHold(verticalBarSlider);
+
+        sliderActions.moveByOffset(0,150).build().perform();
+
+        /*((JavascriptExecutor) driver.getOriginalDriver()).
+                executeScript("arguments[0].scrollTop = arguments[1];", scrollArea, 700);*/
+        //scrollWithOffset(filterElement,0,-20);
+
+        //listAllManufactors.get(56).click();
+        /*try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+        //WebElement filterElement = getFilterRefElement(filterXpath, manufacter);
+        //WebDriverWait wait = new WebDriverWait(driver, 5);
+        //wait.until(ExpectedConditions.visibilityOf(filterElement));
+        //filterElement.click();
+        //Point p = ((Locatable) filterElement).getCoordinates().inViewPort();
+        //Log4Test.info(p.toString());
+        Log4Test.info("Filter Ref-s with '"+ manufacter +"'");
         return this;
     }
 
@@ -70,5 +127,24 @@ public class RefrigiratorsPage {
                                                          + getPriceOfRef(1) + ")");
             return false;
         }
+    }
+
+    public void scrollWithOffset(WebElement webElement, int x, int y) {
+
+        String code = "window.scroll(" + (webElement.getLocation().x + x) + ","
+                + (webElement.getLocation().y + y) + ");";
+
+        ((JavascriptExecutor)driver.getOriginalDriver()).executeScript(code, webElement, x, y);
+
+    }
+
+    private int getNumberOfMan(String manufactor){
+        for(int i=listAllManufactors.size()-1; i>=0; i--) {
+            Log4Test.info(listAllManufactors.get(i).getText());
+            if (listAllManufactors.get(i).getText() == manufactor) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

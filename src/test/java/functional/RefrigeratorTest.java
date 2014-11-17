@@ -12,12 +12,12 @@ import pages.RefrigiratorsPage;
 public class RefrigeratorTest extends FunctionalTest {
 
     //Test verifies that link "Sort by Price" sorts refrigerators by price desc
-    @Test
-    public void areRefrigiratorsLGSortTest() {
+    @Test(dataProvider = "REFsManufactors", dataProviderClass = StaticDataProviders.class)
+    public void areRefrigiratorsSortTest(String manufactor) {
         MainPage mainPage = new MainPage(driver);
         mainPage.initPage();
         RefrigiratorsPage refsPage = mainPage.selectSubMenuREFs();
-        refsPage.filterLGclick();
+        refsPage.filterRefClick(manufactor);
         refsPage.sortByPrice();
         Assert.assertTrue(refsPage.areREFsSortedByPrice(),
                                      "Ref-s are NOT SORTED by price desc!");
