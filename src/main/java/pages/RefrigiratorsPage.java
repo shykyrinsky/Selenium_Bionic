@@ -6,6 +6,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.internal.Locatable;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,6 +25,8 @@ public class RefrigiratorsPage {
     protected WebDriverWrapper driver;
 
     private static String filterXpath = "//*[@id='filters']//a[contains(text(), 'manufactor')]";
+
+
 
     @FindBy(xpath = "//*[@id='filters']//div[@class='jspPane']/p/a")
     private List<WebElement> listAllManufactors;
@@ -46,6 +49,7 @@ public class RefrigiratorsPage {
     @FindBy(xpath = "//*[@id='catalogue']//span[@class = 'ddopener']")
     private List<WebElement> sortList;
 
+    @CacheLookup
     @FindBy(xpath = "//*[@id='catalogue']//a[contains(@href, 'sort=0')]")
     private WebElement sortByPriceLink;
 
@@ -74,15 +78,15 @@ public class RefrigiratorsPage {
                         " document.body.scrollHeight,document.documentElement.clientHeight)/7));");
         expandAllLink.click();
         //driver.switchTo().frame(scrollArea);
-        int width = verticalBar.getSize().width;
+        /*int width = verticalBar.getSize().width;
         WebElement filterElement = getFilterRefElement(filterXpath, manufacter);
         Actions sliderActions = new Actions(driver.getOriginalDriver());
         sliderActions.clickAndHold(verticalBarSlider);
 
-        sliderActions.moveByOffset(0,150).build().perform();
+        sliderActions.moveByOffset(0,40).build().perform();*/
 
-        /*((JavascriptExecutor) driver.getOriginalDriver()).
-                executeScript("arguments[0].scrollTop = arguments[1];", scrollArea, 700);*/
+        ((JavascriptExecutor) driver.getOriginalDriver()).
+                executeScript("arguments[0].scrollTop = arguments[1];", scrollArea, 700);
         //scrollWithOffset(filterElement,0,-20);
 
         //listAllManufactors.get(56).click();
@@ -91,12 +95,13 @@ public class RefrigiratorsPage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        //WebElement filterElement = getFilterRefElement(filterXpath, manufacter);
+        WebElement filterElement = getFilterRefElement(filterXpath, manufacter);
         //WebDriverWait wait = new WebDriverWait(driver, 5);
         //wait.until(ExpectedConditions.visibilityOf(filterElement));
-        //filterElement.click();
-        //Point p = ((Locatable) filterElement).getCoordinates().inViewPort();
-        //Log4Test.info(p.toString());
+        getNumberOfMan(manufacter);
+        filterElement.click();
+        Point p = ((Locatable) filterElement).getCoordinates().inViewPort();
+        Log4Test.info(p.toString());
         Log4Test.info("Filter Ref-s with '"+ manufacter +"'");
         return this;
     }
