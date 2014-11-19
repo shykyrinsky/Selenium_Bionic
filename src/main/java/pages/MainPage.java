@@ -110,14 +110,13 @@ public class MainPage {
             return false;
         }
     }
-
         //click on "Compare Price" Button
     public ComparsionPage comparePrices() {
         searchResults.get(0).findElement(compareBtn).click();
         Log4Test.info("click on 'Compare Price' button");
         return new ComparsionPage(driver);
     }
-        //select submenu "Refrigirators" from menu "Household Technicks"
+        //select submenu "Refrigerators" from menu "Household Technicks"
     public RefrigiratorsPage selectSubMenuREFs() {
         Actions actions = new Actions(driver.getOriginalDriver());
         actions.moveToElement(menuItemBT).build().perform();
