@@ -1,7 +1,5 @@
 package pages;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
@@ -22,6 +20,7 @@ public class WelcomePage {
             Log4Test.info("Registration complete successfull");
             return true;
         } else {
+            Log4Test.info("Registration failed - not on 'WelcomePage'");
             return false;
         }
     }

@@ -6,8 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.MainPage;
 
-import static java.lang.Thread.sleep;
-
 
 /**
  * Created by Illya on 06.11.2014.
@@ -27,7 +25,7 @@ public class FindProductTest extends FunctionalTest {
     }
 
     // Negative test that verifies @product isNot found in price lists
-    @Test(dataProvider = "products", dataProviderClass = StaticDataProviders.class)
+    @Test(dataProvider = "products", dataProviderClass = StaticDataProviders.class, priority = 1)
     public void isNotSearchResultPresentTest(String product) {
         MainPage mainPage = new MainPage(driver);
         mainPage.initPage();

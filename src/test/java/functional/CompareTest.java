@@ -17,8 +17,10 @@ public class CompareTest extends FunctionalTest {
         MainPage mainPage = new MainPage(driver);
         mainPage.initPage();
         mainPage.searchProduct(product);
+        Assert.assertTrue(mainPage.verifySearchResultsPresent(),
+                                            "Product " + product + " +  is NOT found");
         ComparsionPage comparePage = mainPage.comparePrices();
         Assert.assertTrue(comparePage.verifyStoresPresent(),
-                                 "There are NOT several offers for this product");
+                                      "There are NOT several offers for this product");
 }
 }

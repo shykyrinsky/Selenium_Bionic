@@ -1,7 +1,6 @@
 package pages;
 
 import actors.User;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -48,7 +47,7 @@ public class RegistrationPage {
 
     // fill all fields with user's data
     public RegistrationPage setFieldsWithUserData(User user) {
-        Log4Test.info("Registering user with " + user.email);
+        Log4Test.info("Registering user with: " + user.email);
         emailField.sendKeys(user.email);
         nickField.clear();
         nickField.sendKeys(user.nick);

@@ -1,11 +1,12 @@
 package selenium;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Log4Test;
 import utils.PropertyLoader;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.Set;
 /**
  * Created by Bionic on 11/10/14.
  */
-public class WebDriverWrapper implements WebDriver {
+public class WebDriverWrapper implements WebDriver, TakesScreenshot {
 
     private  static  WebDriver driver;
     private  static final int TIME_TO_WAIT = Integer.valueOf(PropertyLoader.loadProperty("selenium.max.timeout"));
@@ -94,5 +95,25 @@ public class WebDriverWrapper implements WebDriver {
     @Override
     public Options manage() {
         return driver.manage();
+    }
+
+    @Override
+    public <X> X getScreenshotAs(OutputType<X> outType) {
+        try {
+            if (driver instanceof FirefoxDriver) {
+                return ((FirefoxDriver) driver).getScreenshotAs(outType);
+            } else if (driver instanceof ChromeDriver) {
+                return ((ChromeDriver) driver).getScreenshotAs(outType);
+            } else if (driver instanceof InternetExplorerDriver) {
+                return ((InternetExplorerDriver) driver).getScreenshotAs(outType);
+            } else {
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            Log4Test.error("Exception while getting Screenshot: " + e.getMessage());
+        }
+        return null;
     }
 }

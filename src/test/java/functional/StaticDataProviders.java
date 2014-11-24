@@ -32,7 +32,7 @@ public class StaticDataProviders {
     @DataProvider(name = "REFsManufactors")
     public static Object[][] createREFs() {
         return new Object[][] {
-                {"AEG"},                      //data Refrigerators test
+                {"LG"},                      //data Refrigerators test
         };
     }
 }

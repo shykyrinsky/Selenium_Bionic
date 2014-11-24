@@ -3,19 +3,19 @@ package functional;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 import selenium.WebDriverFactory;
 import selenium.WebDriverWrapper;
+import utils.FunctionalTestRule;
 import utils.Log4Test;
 import utils.PropertyLoader;
-import java.io.IOException;
-import java.lang.reflect.Method;
-
-
 
 /**
  * Created by Bionic on 11/5/14.
  */
-public class FunctionalTest {
+
+@Listeners({FunctionalTestRule.class})
+public abstract class FunctionalTest {
 
     public static WebDriverWrapper driver;
 
@@ -30,18 +30,12 @@ public class FunctionalTest {
     }
 
     @BeforeMethod
-    public void logMethodName(Method m) {
-        Log4Test.info("-------" + m.getName() + "-------");
+    public void logMethodName() {
         driver.get(BASE_URL);
     }
 
     @AfterSuite (alwaysRun = true)
     public void tearDown () {
-        try {
-            Runtime.getRuntime().exec("taskkill /F /IM plugin-container.exe");  //cause Firefox crashes on .quit();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         if (driver != null) {
             Log4Test.info("Close browser");
             driver.quit();

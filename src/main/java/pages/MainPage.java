@@ -2,14 +2,10 @@ package pages;
 
 
 import org.openqa.selenium.By;
-
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import org.testng.Assert;
 import selenium.WebDriverWrapper;
 import utils.Log4Test;
@@ -48,13 +44,13 @@ public class MainPage {
     @FindBy(xpath = "//*[@id='test']//div[@class='search-result-page no']")
     private WebElement noResults;
 
-    private final By compareBtn = By.xpath(".//a[@class='but-box']");
-
     @FindBy(xpath = "//a[@href='/bt/']")
     private WebElement menuItemBT;
 
     @FindBy(xpath = "//a[@href='/bt/holodilniki/']")
     private WebElement subMenuItemRefs;
+
+    private final By compareBtn = By.xpath(".//a[@class='but-box']");
 
 
     public MainPage(WebDriverWrapper driver) {
@@ -116,6 +112,7 @@ public class MainPage {
         Log4Test.info("click on 'Compare Price' button");
         return new ComparsionPage(driver);
     }
+
         //select submenu "Refrigerators" from menu "Household Technicks"
     public RefrigiratorsPage selectSubMenuREFs() {
         Actions actions = new Actions(driver.getOriginalDriver());

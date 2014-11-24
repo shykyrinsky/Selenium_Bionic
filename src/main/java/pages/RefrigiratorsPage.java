@@ -1,20 +1,13 @@
 package pages;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.internal.Coordinates;
-import org.openqa.selenium.internal.Locatable;
-import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import selenium.WebDriverWrapper;
 import utils.Log4Test;
 
-import javax.swing.*;
 import java.util.List;
 
 /**
@@ -25,6 +18,8 @@ public class RefrigiratorsPage {
     protected WebDriverWrapper driver;
 
     private final static String URL_MATCH = "holodilniki";
+
+    private static String dynamicXpath = "//*[@id='filters']//a[text()='manufactor']";
 
     @FindBy(xpath = "//*[@id='filters']//div[@class='jspPane']/p/a")
     private List<WebElement> listAllManufactors;
@@ -44,13 +39,9 @@ public class RefrigiratorsPage {
     @FindBy(xpath = "//span[@class='title-span']/a[@class='hide']")
     private WebElement hideToolbarLink;
 
-    @FindBy(xpath = "//*[@id='filters']/div[6]/div/div")
-    private WebElement scrollArea;
-
     @FindBy(xpath = "//*[@id='catalogue']//span[@class = 'ddopener']")
     private List<WebElement> sortList;
 
-    //@CacheLookup
     @FindBy(xpath = "//*[@id='catalogue']//a[contains(@href, 'sort=0')]")
     private WebElement sortByPriceLink;
 
@@ -71,34 +62,11 @@ public class RefrigiratorsPage {
 
     //click on '@manufactor' in list of manufactors
     public RefrigiratorsPage filterRefClick(String manufacter) {
-        hideToolbarLink.click();
-        expandAllManLink.click();
-        Actions sliderActions = new Actions(driver.getOriginalDriver());
-        sliderActions.moveToElement(closeAllManLink);
-        sliderActions.clickAndHold(verticalBarSlider);
-        Log4Test.info("Move slider in Ref-s list");
-        int numOfMan = listAllManufactors.size();
-        int scrollStep = calculateScrollStep(verticalBar, verticalBarSlider, numOfMan);
-        boolean foundFlag = false;
-        for(int i=0; i < numOfMan; i++) {
-            try {
-                if(listAllManufactors.get(i).getText().equalsIgnoreCase(manufacter)) {
-                    foundFlag = true;
-                    sliderActions.release().perform();
-                    listAllManufactors.get(i).click();
-                    break;
-                } else {
-                    sliderActions.moveByOffset(0, scrollStep).build().perform();
-                }
-            } catch (Exception e) {
-                Log4Test.error("Exception during Scrolling: " + e.getMessage());
-            }
-        }
-        if(!foundFlag) {
-            sliderActions.release().perform();
-            Log4Test.error("Not found '" + manufacter + "' in list of manufacters");
+        if (getFilterRefElement(dynamicXpath, manufacter).size() > 0){
+            Log4Test.info("Click on '" + manufacter + "' in filter Ref-s");
+            getFilterRefElement(dynamicXpath, manufacter).get(0).click();
         } else {
-            Log4Test.info("Ref-s are filtered with '"+ manufacter +"'");
+            Log4Test.error("Can't find '" + manufacter + "' in Ref-s list");
         }
         return this;
     }
@@ -132,13 +100,13 @@ public class RefrigiratorsPage {
     //return true if list of REFs is sorted by price desc (first's price < second's price)
     public boolean areREFsSortedByPrice() {
         if(isMoreThanOneRefInList()) {
-            if (this.getPriceOfRef(0) <= this.getPriceOfRef(1)) {
+            if (getPriceOfRef(0) <= getPriceOfRef(1)) {
                 Log4Test.info("Ref-s are SORTED by price desc (" + getPriceOfRef(0) + " < " +
-                        +getPriceOfRef(1) + ")");
+                                                                 + getPriceOfRef(1) + ")");
                 return true;
             } else {
                 Log4Test.info("Ref-s are NOT SORTED -> 1: " + getPriceOfRef(0) + " | 2: " +
-                        +getPriceOfRef(1) + ")");
+                                                            + getPriceOfRef(1) + ")");
                 return false;
             }
         } else {
@@ -147,7 +115,12 @@ public class RefrigiratorsPage {
         }
     }
 
-    public int calculateScrollStep(WebElement bar, WebElement slider, int numberOfElements ) {
+    private List<WebElement> getFilterRefElement(String dynamicXpath, String var) {
+        return driver.findElements(By.xpath(dynamicXpath.replace("manufactor", var)));
+    }
+
+    private int calculateScrollStep(WebElement bar, WebElement slider, int numberOfElements ) {
         return Math.round((float)(bar.getSize().height - slider.getSize().height)/numberOfElements);
     }
+
 }
